@@ -1,1 +1,4 @@
-POST http://localhost:8080/v1/formula/get/7745
+POST http://localhost:8080/v1/formula/get/1
+Content-Type: application/json;charset=utf-8
+
+{}

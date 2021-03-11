@@ -1,9 +1,8 @@
-POST http://localhost:8080/v1/formula/save/7745
+POST http://localhost:8080/v1/formula/save/1
 Content-Type: application/json;charset=utf-8
 
 {
     "technology": "4",
-    "default_detail": "{\"4RL\":0.97,\"5BL\":1.6,\"HGL\":0.66}",
-    "deep_detail": "{\"4RL\":0.97,\"5BL\":1.6,\"HGL\":0.66}",
-    "light_detail": "{\"4RL\":1.06,\"5BL\":1.92,\"HGL\":0.66}"
+    "kind": "1",
+    "detail": "[{\"name\":\"5HL\",\"defaultRate\":\"1.39\"},{\"name\":\"4RL\",\"defaultRate\":\"1.19\"}]"
 }

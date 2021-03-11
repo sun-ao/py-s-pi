@@ -77,9 +77,8 @@ class Formula(Base):
     
     id = Column(Integer, primary_key=True)
     technology = Column(String(32), nullable=False)
-    default_detail = Column(Text)
-    deep_detail = Column(Text)
-    light_detail = Column(Text)
+    kind = Column(String(32), nullable=False)
+    detail = Column(Text, nullable=False)
     create_time = Column(DateTime, nullable=False, default=datetime.datetime.now)
     last_update_time = Column(DateTime, nullable=False, default=datetime.datetime.now, onupdate=datetime.datetime.now, index=True)
 
@@ -133,6 +132,27 @@ async def formula_save(phone: str, params: Optional[dict] = {}):
             "timestamp": int(round(time.time() * 1000))
         }
 
+@app.post("/v1/formula/count")
+async def formula_count(params: Optional[dict] = {}):
+    try:
+        with get_session() as s:
+            total = s.query(Formula).count()
+            return {
+                "code": 1,
+                "message": "查询成功",
+                "timestamp": int(round(time.time() * 1000)),
+                "result": {
+                    "total": total
+                }
+            }
+    except:
+        log.exception("查询异常")
+        return {
+            "code": 9,
+            "message": "查询失败",
+            "timestamp": int(round(time.time() * 1000))
+        }
+
 
 @app.post("/v1/formula/save/{id}")
 async def formula_save(id: int, params: Optional[dict] = {}):
@@ -142,7 +162,7 @@ async def formula_save(id: int, params: Optional[dict] = {}):
             if formula:
                 s.query(Formula).filter(Formula.id==id).update(params)
             else: 
-                formula = Formula(id=id,technology=params['technology'], default_detail=params['default_detail'], deep_detail=params['deep_detail'], light_detail=params['light_detail'])
+                formula = Formula(id=id,technology=params['technology'], kind=params['kind'], detail=params['detail'])
                 s.add(formula)
                 s.commit()
         return {
@@ -177,6 +197,28 @@ async def formula_get(id: int, params: Optional[dict] = {}):
         return {
             "code": 9,
             "message": "查询失败",
+            "timestamp": int(round(time.time() * 1000))
+        }
+
+
+@app.post("/v1/formula/delete/{id}")
+async def formula_delete(id: int, params: Optional[dict] = {}):
+    try:
+        with get_session() as s:
+            formula = s.query(Formula).filter(Formula.id==id).first()
+            if formula:
+                s.delete(formula)
+                s.commit()
+            return {
+                "code": 1,
+                "message": "删除成功",
+                "timestamp": int(round(time.time() * 1000))
+            }
+    except:
+        log.exception("查询异常")
+        return {
+            "code": 9,
+            "message": "删除失败",
             "timestamp": int(round(time.time() * 1000))
         }
 

@@ -1,4 +1,4 @@
-POST http://localhost:8080/v1/user/find/110
+POST http://localhost:8080/v1/formula/delete/1
 Content-Type: application/json;charset=utf-8
 
 {}
