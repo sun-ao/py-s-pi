@@ -1,0 +1,49 @@
+POST http://localhost:8080/v1/uploadfile
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary2A82BHU7BLlfWPCC
+
+------WebKitFormBoundary2A82BHU7BLlfWPCC
+Content-Disposition: form-data; name="id"
+
+WU_FILE_0
+------WebKitFormBoundary2A82BHU7BLlfWPCC
+Content-Disposition: form-data; name="name"
+
+209-750x422.jpg
+------WebKitFormBoundary2A82BHU7BLlfWPCC
+Content-Disposition: form-data; name="type"
+
+image/jpeg
+------WebKitFormBoundary2A82BHU7BLlfWPCC
+Content-Disposition: form-data; name="lastModifiedDate"
+
+Mon Mar 08 2021 18:20:05 GMT+0800 (中国标准时间)
+------WebKitFormBoundary2A82BHU7BLlfWPCC
+Content-Disposition: form-data; name="size"
+
+9304
+------WebKitFormBoundary2A82BHU7BLlfWPCC
+Content-Disposition: form-data; name="OSSAccessKeyId"
+
+LTAI5ziYdgtaEUVN
+------WebKitFormBoundary2A82BHU7BLlfWPCC
+Content-Disposition: form-data; name="policy"
+
+eyJleHBpcmF0aW9uIjoiMjAyMS0wNS0xMFQxMTo0NjowNi41MjZaIiwiY29uZGl0aW9ucyI6W1siZXEiLCIka2V5IiwiMjAyMTA1MTAvMmIyZDlkNzQtM2QzZC00MzZmLThhMzctOGIyOTZhMDlhYzQwLzhlODJiNGNhLTU3YjYtNDU0Yy1iNjdlLTFhNzM4YjhhZjBlMi5qcGciXV19
+------WebKitFormBoundary2A82BHU7BLlfWPCC
+Content-Disposition: form-data; name="Signature"
+
+JyDP8I5JgH+1DzsGpKpLVysKBcg=
+------WebKitFormBoundary2A82BHU7BLlfWPCC
+Content-Disposition: form-data; name="key"
+
+20210510/2b2d9d74-3d3d-436f-8a37-8b296a09ac40/8e82b4ca-57b6-454c-b67e-1a738b8af0e2.jpg
+------WebKitFormBoundary2A82BHU7BLlfWPCC
+Content-Disposition: form-data; name="success_action_status"
+
+200
+------WebKitFormBoundary2A82BHU7BLlfWPCC
+Content-Disposition: form-data; name="file"; filename="209-750x422.jpg"
+Content-Type: image/jpeg
+
+
+------WebKitFormBoundary2A82BHU7BLlfWPCC--

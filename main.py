@@ -5,7 +5,7 @@ import os
 import time
 from typing import Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -25,6 +25,11 @@ from sqlalchemy import (
     String,
 )
 from props import props 
+
+from qcloud_cos import CosConfig
+from qcloud_cos import CosS3Client
+from qcloud_cos import CosServiceError
+from qcloud_cos import CosClientError
 
 app = FastAPI()
 # CORS支持
@@ -46,6 +51,8 @@ engine = create_engine(
 Session = sessionmaker(bind=engine)
 Base = declarative_base(engine)
 
+config = CosConfig(Region=props["COS_region"], SecretId=props["COS_secret_id"], SecretKey=props["COS_secret_key"], Token=None)  # 获取配置对象
+client = CosS3Client(config)
 
 @contextlib.contextmanager
 def get_session():
@@ -222,6 +229,22 @@ async def formula_delete(id: int, params: Optional[dict] = {}):
             "timestamp": int(round(time.time() * 1000))
         }
 
+@app.post("/v1/uploadfile")
+async def create_upload_file(file: UploadFile = File(...)):
+    start = time.time()
+    try:
+        res = await file.read()
+        response = client.put_object(
+            Bucket=props["COS_bucket"],  # Bucket由bucketname-appid组成
+            Body=res,
+            Key=('123/' +file.filename),
+            StorageClass='STANDARD',
+            ContentType='text/html; charset=utf-8'
+        )
+        print(response['ETag'])
+        return {"message": "success", 'time': time.time() - start, 'filename': file.filename}
+    except Exception as e:
+        return {"message": str(e), 'time': time.time() - start, 'filename': file.filename}
 
 if __name__ == "__main__":
     import uvicorn

@@ -1,3 +1,7 @@
 {
-    "SQLALCHEMY_DATABASE_URI": "mysql+pymysql://username:passport@localhost:3306/database?charset=utf8mb4"
+    "SQLALCHEMY_DATABASE_URI": "mysql+pymysql://username:passport@localhost:3306/database?charset=utf8mb4",
+    "COS_secret_id": "secret_id",
+    "COS_secret_key": "secret_key",
+    "COS_region": "region",
+    "COS_bucket": "bucket"
 }

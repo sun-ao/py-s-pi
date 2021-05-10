@@ -14,6 +14,8 @@ kociemba = "*"
 aiofiles = "*"
 sqlalchemy = "*"
 pymysql = "*"
+python-multipart = "*"
+cos-python-sdk-v5 = "*"
 
 [requires]
 python_version = "3.8"
